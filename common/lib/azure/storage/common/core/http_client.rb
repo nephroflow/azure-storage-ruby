@@ -66,7 +66,7 @@ module Azure::Storage::Common::Core
           ssl_options[:verify] = true
         end
         Faraday.new(uri, ssl: ssl_options) do |conn|
-          conn.use FaradayMiddleware::FollowRedirects
+          conn.use Faraday::FollowRedirects::Middleware
           conn.adapter :net_http_persistent, pool_size: 5 do |http|
             # yields Net::HTTP::Persistent
             http.idle_timeout = 100
